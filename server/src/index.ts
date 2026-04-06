@@ -20,15 +20,6 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 // Routes
 app.use("/api", apiRoutes);
 
-// Health check endpoint
-app.get("/health", (req: Request, res: Response) => {
-    res.json({
-        status: "ok",
-        timestamp: new Date().toISOString(),
-        environment: process.env.NODE_ENV || "development"
-    });
-});
-
 // 404 handler
 app.use((req: Request, res: Response) => {
     res.status(404).json({
@@ -49,5 +40,5 @@ app.use((err: any, req: Request, res: Response) => {
 
 app.listen(port, () => {
     console.log(`🚀 Server is running on http://localhost:${port}`);
-    console.log(`📝 API docs available at http://localhost:${port}/api`);
+    console.log(`📝 API health available at http://localhost:${port}/api/health`);
 });
